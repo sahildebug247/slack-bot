@@ -11,7 +11,9 @@ export = {
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
-
+            slackId:{
+                type:Sequelize.STRING
+            },
             firstName: {
                 type: Sequelize.STRING,
             },

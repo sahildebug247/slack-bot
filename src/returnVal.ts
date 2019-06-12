@@ -19,6 +19,8 @@ export default class ReturnVal {
             message = "Successful";
         if (!data)
             data = {};
+        if(!httpCode)
+            httpCode=200;
         return new ReturnVal(true, message, data, httpCode);
     }
 

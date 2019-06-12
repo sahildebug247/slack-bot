@@ -1,8 +1,11 @@
-import { Controller, Post, Get, Body, Param } from '@nestjs/common';
+import { Controller, Post, Get, Body, Param, Put } from '@nestjs/common';
 import { CreateEmployeeDto } from './dto/CreateEmployeeDto';
 
 import { EmployeeService } from './employee.service';
-import ReturnVal from './returnVal';
+import ReturnVal from '../returnVal';
+import { ManagerUpdateDto } from './dto/ManagerUpdateDto';
+import { SlackUpdateDto } from './dto/SlackUpdateDto';
+import { EmployeeUpdateDto } from './dto/EmployeeUpdateDto';
 @Controller('emp')
 export class EmployeeController {
 
@@ -16,9 +19,24 @@ export class EmployeeController {
     async create(@Body() createEmployeeDto: CreateEmployeeDto):Promise<ReturnVal>{
         return await this.employeeService.createOne(createEmployeeDto);
     }
+    
+    // desc: updates manager id for an employee
+    // access: public
+    // @route /emp/update
+    @Put('update/:id')
+    async update(@Param('id') id:string,@Body() employeeUpdateDto:EmployeeUpdateDto):Promise<ReturnVal>{
+        
+        return await this.employeeService.update(id,employeeUpdateDto);
+    }
 
-
-
+    // desc: updates manager id for an employee
+    // access: public
+    // @route /emp/manager-update
+    @Put('manager-update')
+    async managerUpdate(@Body() managerUpdateDto:ManagerUpdateDto):Promise<ReturnVal>{
+        
+        return await this.employeeService.managerUpdate(managerUpdateDto);
+    }
     
     // desc: finds am employee record by id
     // access: prublic
@@ -35,6 +53,8 @@ export class EmployeeController {
     async findAll():Promise<ReturnVal>{
         return await this.employeeService.findAll();
     }
+    
 
 
+    
 }

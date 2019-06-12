@@ -14,14 +14,16 @@ export default class Employee extends Model<Employee> {
   @Column
   id: number;
 
-  @Length({min:4,max:20})
+  @Column
+  slackId:string
+
+  @Length({min:2,max:20})
   @AllowNull(false)
   @Column
   firstName:string
 
   
-  @Length({min:4,max:20})
-  @AllowNull(false)
+  @Length({min:2,max:20})
   @Column
   lastName:string
 
@@ -54,12 +56,11 @@ export default class Employee extends Model<Employee> {
 
   @IsDate
   @AllowNull(false)
-  @Column
+  @Column(DataType.DATEONLY)
   joinDate:Date
 
 
   @IsNumeric
-  @AllowNull(false)
   @Column
   managerId:number
   
