@@ -14,6 +14,7 @@
     "start:debug": "nodemon --config nodemon-debug.json",
     "start:dev": "concurrently --handle-input \"wait-on dist/main.js && nodemon\" \"tsc -w -p tsconfig.build.json\" ",
     "prestart:prod": "rimraf dist && npm run build",
+    "postinstall": "npm run prestart:prod",
     "start:prod": "node dist/main.js",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",

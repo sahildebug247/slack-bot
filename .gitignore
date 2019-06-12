@@ -1,6 +1,27 @@
-/.vscode
+*~
+*.sw[mnpcod]
+*.log
+*.tmp
+*.tmp.*
+log.txt
+*.sublime-project
+*.sublime-workspace
+.vscode/
+npm-debug.log*
 
-/node_modules
+.idea/
+.sourcemaps/
+.sass-cache/
+.tmp/
+.versions/
+coverage/
+www/
+dist/
+node_modules/
+tmp/
+temp/
+$RECYCLE.BIN/
 
-/dist
-
+.DS_Store
+Thumbs.db
+UserInterfaceState.xcuserstate
