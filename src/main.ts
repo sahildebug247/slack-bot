@@ -9,6 +9,7 @@ async function bootstrap() {
   app.enableCors();
   sequelize
   .sync()
+  // .sync({force:true})
   .then(result=>{
     // console.log(result)
   });

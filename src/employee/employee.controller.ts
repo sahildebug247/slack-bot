@@ -4,7 +4,6 @@ import { CreateEmployeeDto } from './dto/CreateEmployeeDto';
 import { EmployeeService } from './employee.service';
 import ReturnVal from '../returnVal';
 import { ManagerUpdateDto } from './dto/ManagerUpdateDto';
-import { SlackUpdateDto } from './dto/SlackUpdateDto';
 import { EmployeeUpdateDto } from './dto/EmployeeUpdateDto';
 @Controller('emp')
 export class EmployeeController {
@@ -16,8 +15,8 @@ export class EmployeeController {
     // desc: inserts a new employee into record
     // access: public
     @Post()
-    async create(@Body() createEmployeeDto: CreateEmployeeDto):Promise<ReturnVal>{
-        return await this.employeeService.createOne(createEmployeeDto);
+    async create(@Body() createEmployeeDto: any):Promise<ReturnVal>{
+        return await this.employeeService.createMultiple(createEmployeeDto);
     }
     
     // desc: updates manager id for an employee

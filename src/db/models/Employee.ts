@@ -1,5 +1,6 @@
-import {Table, Column, Model,DataType, HasMany, AllowNull, AutoIncrement, PrimaryKey, Length, IsEmail, IsNumeric, IsDate, Unique} from 'sequelize-typescript';
+import {Table, Column, Model,DataType, HasMany, AllowNull, AutoIncrement, PrimaryKey, Length, IsEmail, IsNumeric, IsDate, Unique, BelongsTo, ForeignKey} from 'sequelize-typescript';
 import Attendance from './Attendance';
+import Organization from './Organization';
 
 
 @Table({
@@ -14,6 +15,8 @@ export default class Employee extends Model<Employee> {
   @Column
   id: number;
 
+  @Unique
+  @AllowNull(false)
   @Column
   slackId:string
 
@@ -27,16 +30,6 @@ export default class Employee extends Model<Employee> {
   @Column
   lastName:string
 
-  
-  @Length({min:4,max:7})
-  @AllowNull(false)
-  @Column
-  gender:string
-
-  @IsNumeric
-  @AllowNull(false)
-  @Column
-  age:number
 
   @Unique
   @IsEmail
@@ -49,16 +42,6 @@ export default class Employee extends Model<Employee> {
   @Column(DataType.STRING)
   phone:number
 
-  @Length({min:10,max:100})
-  @AllowNull(false)
-  @Column(DataType.STRING(1234))
-  address:string
-
-  @IsDate
-  @AllowNull(false)
-  @Column(DataType.DATEONLY)
-  joinDate:Date
-
 
   @IsNumeric
   @Column
@@ -68,4 +51,12 @@ export default class Employee extends Model<Employee> {
 
   @HasMany(() => Attendance)
   attendance: Attendance[];
+
+  @ForeignKey(() => Organization)
+  @AllowNull(false)
+  @Column
+  orgId: number;
+
+  @BelongsTo(() => Organization)
+  organization: Organization
 }

@@ -3,12 +3,35 @@ import ReturnVal from '../returnVal';
 import { CreateEmployeeDto } from './dto/CreateEmployeeDto';
 import Employee from '../db/models/Employee';
 import { ManagerUpdateDto } from './dto/ManagerUpdateDto';
-import { SlackUpdateDto } from './dto/SlackUpdateDto';
 import { EmployeeUpdateDto } from './dto/EmployeeUpdateDto';
+import { create } from 'domain';
+import Organization from '../db/models/Organization';
 
 @Injectable()
 export class EmployeeService {
-
+    async createMultiple(createDto:any):Promise<ReturnVal>{
+        try{
+            // console.log(createDto)
+            const {orgId} = createDto;
+            const orgRecord = await Organization.findByPk(orgId);
+            if(!orgRecord || orgRecord === undefined || Object.entries(orgRecord).length === 0){
+                return ReturnVal.error("Organization not found");
+            }else{
+                const {members} = createDto;
+                console.log(members)
+                const empRecords = await Employee.bulkCreate(members,{validate:true});
+                if(empRecords.length === 0){
+                    return ReturnVal.error("Something went wrong")
+                }
+                
+                // const empRecords = await Employee.create(createDto);
+                return ReturnVal.success("Records Crearted", empRecords)
+            }
+        }catch(e){
+            console.log(e)
+            return ReturnVal.error(e.errors,400);
+        }
+    }
 
     async createOne(createDto:CreateEmployeeDto):Promise<ReturnVal>{
         try{

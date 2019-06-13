@@ -1,6 +1,6 @@
 import {Table, Column, Model, ForeignKey, BelongsTo, AllowNull, IsDate, Is, DataType} from 'sequelize-typescript';
 import Employee from './Employee';
-import { isBoolean } from 'util';
+
 
 
 @Table({
@@ -8,9 +8,7 @@ import { isBoolean } from 'util';
 })
 export default class Attendance extends Model<Attendance> {
 
-    //Attributes
-
-
+  //Attributes
   @IsDate
   @AllowNull(false)
   @Column(DataType.DATEONLY)
@@ -32,10 +30,13 @@ export default class Attendance extends Model<Attendance> {
 
   //Assocations 
 
+
+
   @ForeignKey(() => Employee)
+  @AllowNull(false)
   @Column
   empId: number;
   
   @BelongsTo(() => Employee)
-  Employee: Employee;
+  employee: Employee;
 }
