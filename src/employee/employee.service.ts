@@ -4,7 +4,6 @@ import { CreateEmployeeDto } from './dto/CreateEmployeeDto';
 import Employee from '../db/models/Employee';
 import { ManagerUpdateDto } from './dto/ManagerUpdateDto';
 import { EmployeeUpdateDto } from './dto/EmployeeUpdateDto';
-import { create } from 'domain';
 import Organization from '../db/models/Organization';
 
 @Injectable()
@@ -73,6 +72,22 @@ export class EmployeeService {
             const recordsDb= await Employee.findAll();
             if(recordsDb===null || recordsDb.length === 0){
                 return ReturnVal.error("No employee exists",404);
+            }else{
+                return ReturnVal.success("Records Found",recordsDb);
+            }
+        }catch(e){
+            return ReturnVal.error(e.errors,400); 
+        }
+    }
+    async findAllOrg(orgIdDto:any):Promise<ReturnVal>{
+        try{
+            const {orgId} = orgIdDto
+            if(orgId === undefined || orgId === '' || orgId === null){
+                return ReturnVal.error("Invalid Organization Details",404);
+            }
+            const recordsDb= await Employee.findAll({where:{orgId}});
+            if(recordsDb===null || recordsDb===undefined|| recordsDb.length === 0){
+                return ReturnVal.error("No employee exists",[],404,);
             }else{
                 return ReturnVal.success("Records Found",recordsDb);
             }

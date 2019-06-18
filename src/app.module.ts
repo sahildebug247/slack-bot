@@ -7,10 +7,11 @@ import { EmployeeService } from './employee/employee.service';
 import { AttendanceService } from './attendance/attendance.service';
 import { OrganizationController } from './organization/organization.controller';
 import { OrganizationService } from './organization/organization.service';
+import { AuthService } from './auth/auth.service';
 
 @Module({
   imports: [],
   controllers: [AppController, EmployeeController, AttendanceController, OrganizationController],
-  providers: [AppService,EmployeeService, AttendanceService, OrganizationService],
+  providers: [AppService,EmployeeService, AttendanceService, OrganizationService, AuthService],
 })
 export class AppModule {}

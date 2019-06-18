@@ -18,6 +18,14 @@ export class EmployeeController {
     async create(@Body() createEmployeeDto: any):Promise<ReturnVal>{
         return await this.employeeService.createMultiple(createEmployeeDto);
     }
+
+    // @route /emp/all/org
+    // desc: inserts a new employee into record
+    // access: public
+    @Post('/all/org')
+    async findAllOrg(@Body() orgDto: any):Promise<ReturnVal>{
+        return await this.employeeService.findAllOrg(orgDto);
+    }
     
     // desc: updates manager id for an employee
     // access: public
